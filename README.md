@@ -1,6 +1,7 @@
-# Translator Web Application | Aplikasi Penerjemah Web
+# Translator Web  | Penerjemah Web
 
 [English Version Below | Versi Bahasa Indonesia di Bawah]
+
 
 ## English Version
 
@@ -31,7 +32,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Daffa Haidar - daffahaidar1501@gmail.com
 
-
 ## Versi Bahasa Indonesia
 
 Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks ke berbagai bahasa(Jawa, Indonesia, dan Inggris).
@@ -60,9 +60,3 @@ Proyek ini dilisensikan di bawah MIT License - lihat file LICENSE untuk detailny
 ### Kontak
 
 Daffa Haidar - daffahaidar1501@gmail.com
-
-<<<<<<< HEAD
-Link Proyek: https://github.com/daffhaidar/translate-multi-language
-=======
-Link Proyek: [https://translator-multi-language.vercel.app/](https://translator-multi-language.vercel.app/) 
->>>>>>> 291067ac8d2c4566f568f01cbe168cb9ad8df24d

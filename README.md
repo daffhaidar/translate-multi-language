@@ -4,7 +4,7 @@
 
 ## English Version
 
-A web-based translation application that helps users translate text between different languages.
+A web-based translation application that helps users translate text between different languages(Jawa, Indonesia, and English).
 
 ### Features
 
@@ -37,7 +37,8 @@ Project Link: [https://daffhaidar.github.io/translate-multi-language](https://da
 
 ## Versi Bahasa Indonesia
 
-Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks ke berbagai bahasa.
+Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks ke berbagai bahasa(Jawa, Indonesia, dan Inggris).
+
 
 ### Fitur
 

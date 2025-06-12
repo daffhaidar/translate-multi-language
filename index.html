@@ -190,21 +190,16 @@
 
         const prompt = `Terjemahkan teks berikut dari bahasa ${sourceLang} ke bahasa ${targetLang}. Gaya terjemahannya harus natural, santai, dan seperti percakapan sehari-hari, bukan terjemahan yang kaku atau formal. Jika ada kata slang atau ungkapan khas, carikan padanan yang paling mendekati. Teks: "${textToTranslate}" Hasil terjemahan:`;
 
-        const payload = {
-          contents: [{
-            parts: [{
-              text: prompt
-            }]
-          }]
-        };
-
-        const apiKey = "AIzaSyBxJXmFtBSWNz7XIVfT6_YF2J-cYKh5CNE";
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+        try {
+          let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+          const payload = { contents: chatHistory };
+          const apiKey = "";
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
         try {
           const response = await fetch(apiUrl, {
             method: "POST",
-            headers: { 
+            headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify(payload)

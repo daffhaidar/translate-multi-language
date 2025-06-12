@@ -5,32 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Multi-Translate - Penerjemah Elegan</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <!-- SCRIPT BARU: Memanggil library marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
       body {
         font-family: "Inter", sans-serif;
-        background-color: #0f172a; /* bg-slate-900 */
+        background-color: #0f172a;
       }
-      textarea,
-      select {
-        resize: none;
+      textarea, select { resize: none; }
+      textarea::-webkit-scrollbar { width: 8px; }
+      textarea::-webkit-scrollbar-track { background: #1e293b; }
+      textarea::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+      
+      /* Style untuk output div yang baru */
+      #target-text {
+        overflow-y: auto; /* Biar bisa di-scroll kayak textarea */
       }
-      /* Custom scrollbar, dll. tetap sama */
-      textarea::-webkit-scrollbar {
-        width: 8px;
+      /* Style untuk format Markdown yang sudah di-render */
+      #target-text strong {
+        color: #e2e8f0; /* text-slate-200, biar lebih terang */
+        font-weight: 600;
       }
-      textarea::-webkit-scrollbar-track {
-        background: #1e293b;
+      #target-text em {
+        color: #cbd5e1; /* text-slate-300 */
       }
-      textarea::-webkit-scrollbar-thumb {
-        background: #475569;
-        border-radius: 4px;
+       #target-text ul, #target-text ol {
+        padding-left: 1.5rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
       }
-      textarea::-webkit-scrollbar-thumb:hover {
-        background: #64748b;
+       #target-text li {
+        margin-bottom: 0.25rem;
       }
+
       select {
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -41,26 +51,14 @@
         background-size: 1.2em;
         padding-right: 2.5rem;
       }
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .animate-fadeInUp {
-        animation: fadeInUp 0.7s ease-out forwards;
-      }
-      #loading-indicator {
-        transition: opacity 0.3s ease-in-out;
-      }
+      @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-fadeInUp { animation: fadeInUp 0.7s ease-out forwards; }
+      #loading-indicator { transition: opacity 0.3s ease-in-out; }
     </style>
   </head>
   <body class="text-slate-200 flex items-center justify-center min-h-screen p-4">
     <div class="w-full max-w-4xl mx-auto animate-fadeInUp">
+      <!-- Header, Main, Input, Swap (Tidak ada perubahan) -->
       <header class="text-center mb-10">
         <h1 class="text-4xl md:text-5xl font-bold text-white">Translator <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-500">Multi-Bahasa</span></h1>
         <p class="text-slate-400 mt-3">Translate untuk Bahasa Jawa, Indonesia, & Inggris.</p>
@@ -68,58 +66,27 @@
 
       <main class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 shadow-2xl shadow-slate-900/50 rounded-2xl p-6 sm:p-8">
         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-start gap-5">
-          <!-- Input -->
           <div class="flex flex-col h-full">
-            <select id="source-lang-select" class="w-full mb-2 font-semibold text-lg text-white bg-slate-700/50 border-2 border-transparent rounded-lg py-2 px-4 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/50">
-              <option value="Jawa">Jawa</option>
-              <option value="Indonesia" selected>Indonesia</option>
-              <option value="Inggris">Inggris</option>
-            </select>
+            <select id="source-lang-select" class="w-full mb-2 font-semibold text-lg text-white bg-slate-700/50 border-2 border-transparent rounded-lg py-2 px-4 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/50"><option value="Jawa">Jawa</option><option value="Indonesia" selected>Indonesia</option><option value="Inggris">Inggris</option></select>
             <textarea id="source-text" class="w-full h-48 md:h-64 p-4 bg-slate-900/70 rounded-lg border-2 border-slate-700/50 focus:border-sky-500 focus:ring-4 focus:ring-sky-500/20 outline-none" placeholder="Tulis apa saja..."></textarea>
           </div>
-
-          <!-- Swap -->
           <div class="flex items-center justify-center my-2 md:my-0 h-full">
-            <button
-              id="swap-button"
-              title="Tukar Bahasa"
-              class="p-3 rounded-full bg-slate-700 hover:bg-sky-500 text-slate-300 hover:text-white transition-all transform hover:rotate-180 hover:scale-110 focus:outline-none focus:ring-2 ring-offset-4 ring-offset-slate-800 ring-sky-500"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="17 1 21 5 17 9"></polyline>
-                <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
-                <polyline points="7 23 3 19 7 15"></polyline>
-                <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
-              </svg>
-            </button>
+            <button id="swap-button" title="Tukar Bahasa" class="p-3 rounded-full bg-slate-700 hover:bg-sky-500 text-slate-300 hover:text-white transition-all transform hover:rotate-180 hover:scale-110 focus:outline-none focus:ring-2 ring-offset-4 ring-offset-slate-800 ring-sky-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg></button>
           </div>
-
-          <!-- Output -->
+          
+          <!-- PERUBAHAN DI SINI -->
           <div class="flex flex-col h-full">
-            <select id="target-lang-select" class="w-full mb-2 font-semibold text-lg text-white bg-slate-700/50 border-2 border-transparent rounded-lg py-2 px-4 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/50">
-              <option value="Jawa">Jawa</option>
-              <option value="Indonesia">Indonesia</option>
-              <option value="Inggris" selected>Inggris</option>
-            </select>
+            <select id="target-lang-select" class="w-full mb-2 font-semibold text-lg text-white bg-slate-700/50 border-2 border-transparent rounded-lg py-2 px-4 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/50"><option value="Jawa">Jawa</option><option value="Indonesia">Indonesia</option><option value="Inggris" selected>Inggris</option></select>
             <div class="relative w-full h-48 md:h-64">
-              <textarea id="target-text" class="w-full h-full p-4 bg-slate-900 rounded-lg border-2 border-slate-700/50" readonly placeholder="Hasil terjemahan..."></textarea>
-              <div id="loading-indicator" class="hidden opacity-0 absolute inset-0 bg-slate-900/80 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                <svg class="animate-spin h-8 w-8 text-sky-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg
-                ><span class="ml-4 text-lg text-slate-300">Menerjemahkan...</span>
-              </div>
+              <!-- Ganti <textarea> menjadi <div> -->
+              <div id="target-text" class="w-full h-full p-4 bg-slate-900 rounded-lg border-2 border-slate-700/50 text-slate-400">Hasil terjemahan...</div>
+              <div id="loading-indicator" class="hidden opacity-0 absolute inset-0 bg-slate-900/80 backdrop-blur-sm rounded-lg flex items-center justify-center"><svg class="animate-spin h-8 w-8 text-sky-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span class="ml-4 text-lg text-slate-300">Menerjemahkan...</span></div>
             </div>
           </div>
         </div>
 
         <div class="mt-8 flex justify-center">
-          <button
-            id="translate-button"
-            class="w-full md:w-auto px-12 py-3 bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:scale-95 transition-all focus:outline-none focus:ring-4 ring-sky-500/50"
-          >
-            Terjemahkan
-          </button>
+          <button id="translate-button" class="w-full md:w-auto px-12 py-3 bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 active:scale-95 transition-all focus:outline-none focus:ring-4 ring-sky-500/50">Terjemahkan</button>
         </div>
       </main>
 
@@ -129,7 +96,6 @@
     </div>
 
     <script>
-      // --- DOM Elements ---
       const sourceText = document.getElementById("source-text");
       const targetText = document.getElementById("target-text");
       const translateButton = document.getElementById("translate-button");
@@ -143,9 +109,13 @@
         const sourceLang = sourceLangSelect.value;
         const targetLang = targetLangSelect.value;
 
-        if (!textToTranslate) return;
+        if (!textToTranslate) {
+          // Kosongkan div output
+          targetText.innerHTML = '<span class="text-slate-400">Hasil terjemahan...</span>';
+          return;
+        }
         if (sourceLang === targetLang) {
-          targetText.value = textToTranslate;
+          targetText.textContent = textToTranslate; // Pakai textContent untuk teks polosan
           return;
         }
 
@@ -153,29 +123,33 @@
         setTimeout(() => loadingIndicator.classList.remove("opacity-0"), 10);
         translateButton.disabled = true;
         translateButton.classList.add("opacity-50", "cursor-not-allowed");
-
+        
         try {
-          // Panggil 'jembatan' kita, bukan langsung ke Google
-          const response = await fetch("/api/translate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+          const response = await fetch('/api/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               text: textToTranslate,
               source: sourceLang,
-              target: targetLang,
-            }),
+              target: targetLang
+            })
           });
 
           if (!response.ok) {
             const errorResult = await response.json();
-            throw new Error(errorResult.error || "Terjadi kesalahan pada server");
+            throw new Error(errorResult.error || 'Terjadi kesalahan pada server');
           }
 
           const result = await response.json();
-          targetText.value = result.translation;
+          
+          // --- PERUBAHAN DI SINI ---
+          // Gunakan marked.parse() untuk mengubah Markdown jadi HTML
+          // Gunakan .innerHTML untuk menampilkannya sebagai HTML, bukan teks biasa
+          targetText.innerHTML = marked.parse(result.translation);
+
         } catch (error) {
           console.error("Error:", error);
-          targetText.value = `Error: ${error.message}`;
+          targetText.textContent = `Error: ${error.message}`;
         } finally {
           loadingIndicator.classList.add("opacity-0");
           setTimeout(() => loadingIndicator.classList.add("hidden"), 300);
@@ -186,9 +160,15 @@
 
       function handleSwap() {
         [sourceLangSelect.value, targetLangSelect.value] = [targetLangSelect.value, sourceLangSelect.value];
-        [sourceText.value, targetText.value] = [targetText.value, sourceText.value];
+        // Untuk menukar, kita harus hati-hati karena satu berupa div dan satu textarea
+        const sourceVal = sourceText.value;
+        const targetHTML = targetText.innerHTML;
+        
+        // Cuma tukar teksnya, bukan formatnya
+        sourceText.value = targetText.textContent;
+        targetText.innerHTML = sourceVal;
       }
-
+      
       translateButton.addEventListener("click", handleTranslate);
       swapButton.addEventListener("click", handleSwap);
     </script>

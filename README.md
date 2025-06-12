@@ -26,7 +26,7 @@ A web-based translation application that helps users translate text between diff
 
 ### Deployment
 
-This project is deployed using GitHub Pages. The live version can be accessed at: [your-github-pages-url]
+This project is deployed using GitHub Pages. The live version can be accessed at: https://daffhaidar.github.io/translator/
 
 ### License
 
@@ -36,7 +36,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Daffa Haidar - daffahaidar1501@gmail.com
 
-Project Link: [https://github.com/yourusername/translator](https://github.com/yourusername/translator)
+Project Link: https://github.com/daffhaidar/translator
 
 ---
 
@@ -64,7 +64,7 @@ Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks
 
 ### Deployment
 
-Proyek ini di-deploy menggunakan GitHub Pages. Versi live bisa diakses di: [your-github-pages-url]
+Proyek ini di-deploy menggunakan GitHub Pages. Versi live bisa diakses di: https://daffhaidar.github.io/translator/
 
 ### Lisensi
 
@@ -74,4 +74,4 @@ Proyek ini dilisensikan di bawah MIT License - lihat file LICENSE untuk detailny
 
 Daffa Haidar - daffahaidar1501@gmail.com
 
-Link Proyek: [https://github.com/yourusername/translator](https://github.com/yourusername/translator) 
+Link Proyek: https://github.com/daffhaidar/translator 

@@ -202,11 +202,29 @@
               topK: 40,
               topP: 0.95,
               maxOutputTokens: 1024,
-            }
+            },
+            safetySettings: [
+              {
+                category: "HARM_CATEGORY_HARASSMENT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_HATE_SPEECH",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              }
+            ]
           };
 
           const apiKey = "AIzaSyBxJXmFtBSWNz7XIVfT6_YF2J-cYKh5CNE";
-          const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`;
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
 
           const response = await fetch(apiUrl, {
             method: "POST",
@@ -219,7 +237,7 @@
           if (!response.ok) {
             const errorData = await response.json();
             console.error("API Error:", errorData);
-            throw new Error(`Permintaan API gagal dengan status ${response.status}`);
+            throw new Error(`Permintaan API gagal dengan status ${response.status}. Detail: ${JSON.stringify(errorData)}`);
           }
 
           const result = await response.json();

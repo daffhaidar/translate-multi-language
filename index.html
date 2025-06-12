@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Multi-Translate - Penerjemah Elegan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -183,7 +183,7 @@
         }
 
         loadingIndicator.classList.remove("hidden");
-        setTimeout(() => loadingIndicator.classList.remove("opacity-0"), 10); // Start transition
+        setTimeout(() => loadingIndicator.classList.remove("opacity-0"), 10);
         targetText.value = "";
         translateButton.disabled = true;
         translateButton.classList.add("opacity-50", "cursor-not-allowed");
@@ -196,11 +196,17 @@
               parts: [{
                 text: prompt
               }]
-            }]
+            }],
+            generationConfig: {
+              temperature: 0.7,
+              topK: 40,
+              topP: 0.95,
+              maxOutputTokens: 1024,
+            }
           };
 
           const apiKey = "AIzaSyBxJXmFtBSWNz7XIVfT6_YF2J-cYKh5CNE";
-          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+          const apiUrl = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`;
 
           const response = await fetch(apiUrl, {
             method: "POST",
@@ -211,6 +217,8 @@
           });
 
           if (!response.ok) {
+            const errorData = await response.json();
+            console.error("API Error:", errorData);
             throw new Error(`Permintaan API gagal dengan status ${response.status}`);
           }
 
@@ -228,7 +236,7 @@
           targetText.value = `Maaf, terjadi kesalahan: ${error.message}. Coba lagi nanti.`;
         } finally {
           loadingIndicator.classList.add("opacity-0");
-          setTimeout(() => loadingIndicator.classList.add("hidden"), 300); // Wait for transition
+          setTimeout(() => loadingIndicator.classList.add("hidden"), 300);
           translateButton.disabled = false;
           translateButton.classList.remove("opacity-50", "cursor-not-allowed");
         }

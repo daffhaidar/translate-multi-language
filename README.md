@@ -22,7 +22,7 @@ A web-based translation application that helps users translate text between diff
 
 ### Deployment
 
-This project is deployed using GitHub Pages. The live version can be accessed at: https://translator-multi-language.vercel.app/
+The live version can be accessed at: https://translator-multi-language.vercel.app/
 
 ### License
 
@@ -51,7 +51,7 @@ Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks
 
 ### Deployment
 
-Proyek ini di-deploy menggunakan GitHub Pages. Versi live bisa diakses di: https://translator-multi-language.vercel.app/
+Versi live bisa diakses di: https://translator-multi-language.vercel.app/
 
 ### Lisensi
 

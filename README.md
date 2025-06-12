@@ -4,7 +4,7 @@
 
 ## English Version
 
-A web-based translation application that helps users translate text between different languages.
+A web-based translation application that helps users translate text between different languages(Jawa, Indonesia, and English).
 
 ### Features
 
@@ -18,15 +18,10 @@ A web-based translation application that helps users translate text between diff
 - HTML5
 - CSS3
 - JavaScript
-- [Add any specific libraries or frameworks you're using]
-
-### Usage
-
-[Add instructions on how to use your translator application]
 
 ### Deployment
 
-This project is deployed using GitHub Pages. The live version can be accessed at: https://daffhaidar.github.io/translator/
+This project is deployed using GitHub Pages. The live version can be accessed at: https://daffhaidar.github.io/translate-multi-language
 
 ### License
 
@@ -36,13 +31,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Daffa Haidar - daffahaidar1501@gmail.com
 
-Project Link: https://github.com/daffhaidar/translator
+Project Link: https://github.com/daffhaidar/translate-multi-language
 
 ---
 
 ## Versi Bahasa Indonesia
 
-Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks ke berbagai bahasa.
+Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks ke berbagai bahasa(Jawa, Indonesia, dan Inggris).
 
 ### Fitur
 
@@ -56,15 +51,10 @@ Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks
 - HTML5
 - CSS3
 - JavaScript
-- [Tambahkan library atau framework yang digunakan]
-
-### Cara Penggunaan
-
-[Tambahkan petunjuk cara menggunakan aplikasi penerjemah]
 
 ### Deployment
 
-Proyek ini di-deploy menggunakan GitHub Pages. Versi live bisa diakses di: https://daffhaidar.github.io/translator/
+Proyek ini di-deploy menggunakan GitHub Pages. Versi live bisa diakses di: https://daffhaidar.github.io/translate-multi-language
 
 ### Lisensi
 
@@ -74,4 +64,4 @@ Proyek ini dilisensikan di bawah MIT License - lihat file LICENSE untuk detailny
 
 Daffa Haidar - daffahaidar1501@gmail.com
 
-Link Proyek: https://github.com/daffhaidar/translator 
+Link Proyek: https://github.com/daffhaidar/translate-multi-language

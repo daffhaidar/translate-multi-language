@@ -18,11 +18,6 @@ A web-based translation application that helps users translate text between diff
 - HTML5
 - CSS3
 - JavaScript
-- [Add any specific libraries or frameworks you're using]
-
-### Usage
-
-[Add instructions on how to use your translator application]
 
 ### Deployment
 
@@ -56,11 +51,6 @@ Aplikasi penerjemah berbasis web yang membantu pengguna untuk menerjemahkan teks
 - HTML5
 - CSS3
 - JavaScript
-- [Tambahkan library atau framework yang digunakan]
-
-### Cara Penggunaan
-
-[Tambahkan petunjuk cara menggunakan aplikasi penerjemah]
 
 ### Deployment
 
